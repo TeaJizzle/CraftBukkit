@@ -204,21 +204,26 @@ public class TileEntityChest extends TileEntity implements IInventory {
             this.j = null;
             this.k = null;
             this.l = null;
-            if (this.a(this.x - 1, this.y, this.z)) {
-                this.k = (TileEntityChest) this.world.getTileEntity(this.x - 1, this.y, this.z);
-            }
+			try {
+				if (this.a(this.x - 1, this.y, this.z)) {
+					this.k = (TileEntityChest) this.world.getTileEntity(this.x - 1, this.y, this.z);
+				}
 
-            if (this.a(this.x + 1, this.y, this.z)) {
-                this.j = (TileEntityChest) this.world.getTileEntity(this.x + 1, this.y, this.z);
-            }
+				if (this.a(this.x + 1, this.y, this.z)) {
+					this.j = (TileEntityChest) this.world.getTileEntity(this.x + 1, this.y, this.z);
+				}
 
-            if (this.a(this.x, this.y, this.z - 1)) {
-                this.i = (TileEntityChest) this.world.getTileEntity(this.x, this.y, this.z - 1);
-            }
+				if (this.a(this.x, this.y, this.z - 1)) {
+					this.i = (TileEntityChest) this.world.getTileEntity(this.x, this.y, this.z - 1);
+				}
 
-            if (this.a(this.x, this.y, this.z + 1)) {
-                this.l = (TileEntityChest) this.world.getTileEntity(this.x, this.y, this.z + 1);
-            }
+				if (this.a(this.x, this.y, this.z + 1)) {
+					this.l = (TileEntityChest) this.world.getTileEntity(this.x, this.y, this.z + 1);
+				}
+			} catch (ClassCastException ex) {
+				String chestLocation = String.valueOf(this.x) + ", " + String.valueOf(this.y) + ", " + String.valueOf(this.z);
+				Bukkit.getLogger().log(Level.SEVERE, "Corrupt chest at: " + location, ex);
+			}
 
             if (this.i != null) {
                 this.i.a(this, 0);
